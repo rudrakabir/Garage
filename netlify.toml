@@ -1,7 +1,11 @@
 [build]
-  base = "garage-home"
-  command = "npm run build"
-  publish = "dist"
+  command = """
+    cd garage-home && npm install && npm run build && \
+    cd ../shanty-generator && npm install && npm run build && \
+    mkdir -p ../garage-home/dist/shanty && \
+    cp -r dist/* ../garage-home/dist/shanty/
+  """
+  publish = "garage-home/dist"
 
 [[redirects]]
   from = "/shanty/*"
