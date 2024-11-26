@@ -1,9 +1,6 @@
 [build]
   command = """
-    cd garage-home && npm install && npm run build && \
-    cd ../shanty-generator && npm install && npm run build && \
-    mkdir -p ../garage-home/dist/shanty && \
-    cp -r dist/* ../garage-home/dist/shanty/
+    cd garage-home && npm install && npm run build
   """
   publish = "garage-home/dist"
 
