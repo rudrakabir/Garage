@@ -1,7 +1,12 @@
 [build]
-  base = "garage-home"        # Tells Netlify which directory to work from
-  command = "npm run build"   # Command to build the site
-  publish = "dist"           # Directory containing the built site
+  base = "garage-home"
+  command = """
+    npm run build && \
+    cd ../shanty-generator && npm install && npm run build && \
+    mkdir -p ../garage-home/dist/shanty && \
+    cp -r dist/* ../garage-home/dist/shanty/
+  """
+  publish = "dist"
 
 [[redirects]]
   from = "/shanty/*"
