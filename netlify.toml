@@ -1,8 +1,7 @@
 [build]
-  command = """
-    cd garage-home && npm install && npm run build
-  """
-  publish = "garage-home/dist"
+  base = "garage-home"        # Tells Netlify which directory to work from
+  command = "npm run build"   # Command to build the site
+  publish = "dist"           # Directory containing the built site
 
 [[redirects]]
   from = "/shanty/*"
