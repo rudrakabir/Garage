@@ -1,0 +1,27 @@
+/* Import Tailwind's base styles */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Base styles that we want to keep */
+@layer base {
+  :root {
+    /* Font rendering optimizations we want to keep */
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply min-h-screen bg-gray-100;
+  }
+}
+
+/* Custom styles that we can't easily do with Tailwind */
+@layer components {
+  .custom-button {
+    @apply rounded-lg border border-transparent px-4 py-2 font-medium 
+           transition-colors duration-200 ease-in-out;
+  }
+}
