@@ -1,5 +1,5 @@
 import React from 'react';
-import { Code2, Music, Plus } from 'lucide-react';
+import { Code2, Music, Plus, Type } from 'lucide-react';
 
 const AppCard = ({ title, description, icon: Icon, link }) => (
   <a href={link} className="block no-underline">
@@ -22,10 +22,10 @@ const GarageHome = () => {
       link: "/shanty"
     },
     {
-      name: 'Text Synth',
-      description: 'Your text synth app description here',
-      path: '/text-synth',
-      icon: '📝'  // or whichever icon you prefer
+      title: "Text Synth",
+      description: "Your text synth app description here",
+      icon: Type,
+      link: "/text-synth"
     },
     {
       title: "Coming Soon",
