@@ -22,6 +22,12 @@ const GarageHome = () => {
       link: "/shanty"
     },
     {
+      name: 'Text Synth',
+      description: 'Your text synth app description here',
+      path: '/text-synth',
+      icon: '📝'  // or whichever icon you prefer
+    },
+    {
       title: "Coming Soon",
       description: "More apps are in development",
       icon: Plus,
