@@ -1,0 +1,36 @@
+/* src/styles/components/shanty.css */
+.shanty-container {
+    @apply min-h-screen bg-gray-100 flex items-center justify-center p-4;
+  }
+  
+  .shanty-card {
+    @apply w-full max-w-md;
+  }
+  
+  .shanty-header {
+    @apply flex justify-between items-center;
+  }
+  
+  .shanty-controls {
+    @apply flex gap-2;
+  }
+  
+  .shanty-button {
+    @apply p-2 rounded-full hover:bg-gray-100;
+  }
+  
+  .shanty-grid {
+    @apply grid grid-cols-4 gap-2 w-full;
+  }
+  
+  .note-cell {
+    @apply p-2 text-center rounded transition-colors duration-200;
+  }
+  
+  .note-cell.active {
+    @apply bg-blue-500 text-white;
+  }
+  
+  .note-cell.inactive {
+    @apply bg-gray-100;
+  }
