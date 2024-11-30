@@ -6,6 +6,7 @@ import TextSynth from './components/TextSynth/TextSynth';
 import RhythmicTextSynth from './components/TextSynth/RhythmicTextSynth';
 import ShantyGenerator from './components/ShantyGenerator/ShantyGenerator';
 import MusicalPaint from './components/MusicalPaint/Paint';
+import DrumMachine from './components/DrumMachine/machine.jsx';
 
 // Navigation bar component for app pages
 const NavBar = () => {
@@ -70,7 +71,7 @@ const Home = () => {
       link: "/rhythmic-text-synth"
     },
     {
-      title: "Drum Machine",
+      title: "Drum Pad",
       description: "Create beats with an interactive drum pad",
       icon: Music2,
       link: "/drumpad"
@@ -80,7 +81,13 @@ const Home = () => {
       description: "Draw melodies and create visual music on a canvas",
       icon: Music4,
       link: "/paint"
-    }
+    },
+    {
+      title: "Drum Machine",
+      description: "Drum machine with many loops",
+      icon: Music4,
+      link: "/machine"
+    },
   ];
 
   return (
@@ -123,6 +130,11 @@ const App = () => {
         <Route path="/rhythmic-text-synth" element={
           <AppLayout>
             <RhythmicTextSynth />
+          </AppLayout>
+        } />
+        <Route path="/machine" element={
+          <AppLayout>
+            <DrumMachine />
           </AppLayout>
         } />
         <Route path="/shanty" element={

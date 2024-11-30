@@ -1,0 +1,132 @@
+/* DrumMachine.css */
+
+.drum-machine {
+    background: linear-gradient(145deg, #1a1a1a, #2d2d2d);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  }
+  
+  .step-button {
+    transition: all 0.15s ease-in-out;
+    position: relative;
+  }
+  
+  .step-button:active {
+    transform: scale(0.95);
+  }
+  
+  .step-button.active {
+    background: linear-gradient(145deg, #3b82f6, #2563eb);
+    box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+  }
+  
+  .step-button.current {
+    border-color: rgba(255, 255, 255, 0.8);
+  }
+  
+  .step-button:hover::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: inherit;
+    pointer-events: none;
+  }
+  
+  .control-button {
+    transition: all 0.2s ease-in-out;
+  }
+  
+  .control-button:active {
+    transform: scale(0.95);
+  }
+  
+  .track-name {
+    font-family: 'Space Mono', monospace;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  }
+  
+  .bpm-input {
+    transition: all 0.2s ease;
+  }
+  
+  .bpm-input:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
+  }
+  
+  /* Add pulsing animation for playing state */
+  @keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.6; }
+    100% { opacity: 1; }
+  }
+  
+  .playing .current {
+    animation: pulse 0.5s ease infinite;
+  }
+  
+  /* Scrollbar styling */
+  .drum-machine::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  .drum-machine::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+  }
+  
+  .drum-machine::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+  }
+  
+  .drum-machine::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3);
+  }
+  
+  /* Range input styling for future volume controls */
+  input[type="range"] {
+    -webkit-appearance: none;
+    background: transparent;
+  }
+  
+  input[type="range"]::-webkit-slider-runnable-track {
+    height: 4px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 2px;
+  }
+  
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background: #3b82f6;
+    margin-top: -6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  input[type="range"]::-webkit-slider-thumb:hover {
+    transform: scale(1.1);
+    background: #2563eb;
+  }
+  
+  /* Mobile responsiveness */
+  @media (max-width: 768px) {
+    .drum-machine {
+      padding: 1rem;
+    }
+    
+    .track-name {
+      font-size: 0.875rem;
+    }
+    
+    .step-button {
+      padding: 0.5rem;
+    }
+  }
