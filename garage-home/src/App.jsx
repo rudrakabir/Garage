@@ -1,5 +1,5 @@
 import React from 'react';
-import { Code2, Music, Plus, Type, Drums } from 'lucide-react';
+import { Code2, Music, Plus, Type, Music2 } from 'lucide-react';
 
 const AppCard = ({ title, description, icon: Icon, link }) => (
   <a href={link} className="block no-underline">
@@ -30,7 +30,7 @@ const GarageHome = () => {
     {
       title: "Drum Machine",
       description: "Create beats with an interactive drum pad",
-      icon: Drums,
+      icon: Music2,
       link: "/drumpad"
     },
     {
