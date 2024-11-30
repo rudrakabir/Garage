@@ -1,45 +1,41 @@
 import React, { useState, useCallback, useEffect } from 'react';
 
-const DrumPad = () => {
-  // Define drum sounds with their respective keys and audio files
-  const drums = [
-    { key: 'Q', label: 'Kick', color: 'bg-blue-500', sound: '/drumpad/drums/kick.mp3' },
-    { key: 'W', label: 'Snare', color: 'bg-red-500', sound: '/drumpad/drums/snare.mp3' },
-    { key: 'E', label: 'Hi-Hat', color: 'bg-green-500', sound: '/drumpad/drums/hihat.mp3' },
-    { key: 'A', label: 'Tom 1', color: 'bg-yellow-500', sound: '/drumpad/drums/tom1.mp3' },
-    { key: 'S', label: 'Tom 2', color: 'bg-purple-500', sound: '/drumpad/drums/tom2.mp3' },
-    { key: 'D', label: 'Crash', color: 'bg-pink-500', sound: '/drumpad/drums/crash.mp3' },
-    { key: 'Z', label: 'Clap', color: 'bg-orange-500', sound: '/drumpad/drums/clap.mp3' },
-    { key: 'X', label: 'Rim', color: 'bg-teal-500', sound: '/drumpad/drums/rim.mp3' },
-    { key: 'C', label: 'Ride', color: 'bg-indigo-500', sound: '/drumpad/drums/ride.mp3' }
-  ];
+// Move drums array outside component
+const DRUMS = [
+  { key: 'Q', label: 'Kick', color: 'bg-blue-500', sound: '/drumpad/drums/kick.mp3' },
+  { key: 'W', label: 'Snare', color: 'bg-red-500', sound: '/drumpad/drums/snare.mp3' },
+  { key: 'E', label: 'Hi-Hat', color: 'bg-green-500', sound: '/drumpad/drums/hihat.mp3' },
+  { key: 'A', label: 'Tom 1', color: 'bg-yellow-500', sound: '/drumpad/drums/tom1.mp3' },
+  { key: 'S', label: 'Tom 2', color: 'bg-purple-500', sound: '/drumpad/drums/tom2.mp3' },
+  { key: 'D', label: 'Crash', color: 'bg-pink-500', sound: '/drumpad/drums/crash.mp3' },
+  { key: 'Z', label: 'Clap', color: 'bg-orange-500', sound: '/drumpad/drums/clap.mp3' },
+  { key: 'X', label: 'Rim', color: 'bg-teal-500', sound: '/drumpad/drums/rim.mp3' },
+  { key: 'C', label: 'Ride', color: 'bg-indigo-500', sound: '/drumpad/drums/ride.mp3' }
+];
 
-  // Create audio elements for each drum
+const DrumPad = () => {
   const [audioElements, setAudioElements] = useState({});
   const [activePads, setActivePads] = useState({});
   const [lastPlayed, setLastPlayed] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   const [loadingErrors, setLoadingErrors] = useState([]);
 
-  // Initialize audio elements with error handling
   useEffect(() => {
     const audioObj = {};
     const errors = [];
     let loadedCount = 0;
 
-    drums.forEach(({ key, sound, label }) => {
+    DRUMS.forEach(({ key, sound, label }) => {
       const audio = new Audio(sound);
       audio.preload = 'auto';
       
-      // Handle successful load
       audio.addEventListener('canplaythrough', () => {
         loadedCount++;
-        if (loadedCount === drums.length) {
+        if (loadedCount === DRUMS.length) {
           setIsLoading(false);
         }
       }, { once: true });
 
-      // Handle loading errors
       audio.addEventListener('error', () => {
         errors.push(`Failed to load ${label} (${sound})`);
         setLoadingErrors(prev => [...prev, `Failed to load ${label} (${sound})`]);
@@ -50,48 +46,42 @@ const DrumPad = () => {
 
     setAudioElements(audioObj);
 
-    // Cleanup function
     return () => {
       Object.values(audioObj).forEach(audio => {
         audio.pause();
         audio.src = '';
       });
     };
-  }, []); // Empty dependency array since drums is constant
+  }, []); // Empty dependency array is fine now since DRUMS is constant and outside component
 
-  // Play sound and show visual feedback
   const playSound = useCallback((key) => {
     if (audioElements[key]) {
-      // Reset audio to start if it's already playing
       audioElements[key].currentTime = 0;
       audioElements[key].play().catch(error => {
         console.error(`Error playing sound for key ${key}:`, error);
       });
       
-      // Visual feedback
       setActivePads(prev => ({ ...prev, [key]: true }));
-      setLastPlayed(drums.find(d => d.key === key)?.label || '');
+      setLastPlayed(DRUMS.find(d => d.key === key)?.label || '');
       
       setTimeout(() => {
         setActivePads(prev => ({ ...prev, [key]: false }));
       }, 100);
     }
-  }, [audioElements]);
+  }, [audioElements]); // Only audioElements needed now
 
-  // Handle keyboard events
   useEffect(() => {
     const handleKeyDown = (e) => {
       const key = e.key.toUpperCase();
-      if (drums.some(drum => drum.key === key)) {
+      if (DRUMS.some(drum => drum.key === key)) {
         playSound(key);
       }
     };
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [playSound]);
+  }, [playSound]); // Only playSound needed now
 
-  // Loading screen
   if (isLoading) {
     return (
       <div className="p-6 bg-gray-100 rounded-lg shadow-xl max-w-2xl mx-auto">
@@ -113,7 +103,7 @@ const DrumPad = () => {
   return (
     <div className="p-6 bg-gray-100 rounded-lg shadow-xl max-w-2xl mx-auto">
       <div className="grid grid-cols-3 gap-4">
-        {drums.map(({ key, label, color }) => (
+        {DRUMS.map(({ key, label, color }) => (
           <button
             key={key}
             onClick={() => playSound(key)}
