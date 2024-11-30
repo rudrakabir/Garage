@@ -1,10 +1,11 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route, Link, useNavigate } from 'react-router-dom';
-import { Code2, Music, Type, Music2, ArrowLeft } from 'lucide-react';
+import { Code2, Music, Type, Music2, ArrowLeft, Music4 } from 'lucide-react';
 import DrumPad from './components/DrumPad/DrumPad';
 import TextSynth from './components/TextSynth/TextSynth';
 import RhythmicTextSynth from './components/TextSynth/RhythmicTextSynth';
 import ShantyGenerator from './components/ShantyGenerator/ShantyGenerator';
+import MusicalPaint from './components/MusicalPaint/Paint';
 
 // Navigation bar component for app pages
 const NavBar = () => {
@@ -73,6 +74,12 @@ const Home = () => {
       description: "Create beats with an interactive drum pad",
       icon: Music2,
       link: "/drumpad"
+    },
+    {
+      title: "Musical Paint",
+      description: "Draw melodies and create visual music on a canvas",
+      icon: Music4,
+      link: "/paint"
     }
   ];
 
@@ -123,6 +130,12 @@ const App = () => {
             <ShantyGenerator />
           </AppLayout>
         } />
+        <Route path="/paint" element={
+  <AppLayout>
+    <MusicalPaint />
+  </AppLayout>
+} />
+
       </Routes>
     </BrowserRouter>
   );
