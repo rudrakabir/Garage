@@ -27,7 +27,7 @@ const DrumPad = () => {
       audioObj[key] = audio;
     });
     setAudioElements(audioObj);
-  }, []);
+  }, [drums]); // Added drums as dependency
 
   // Play sound and show visual feedback
   const playSound = useCallback((key) => {
@@ -55,7 +55,7 @@ const DrumPad = () => {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [playSound]);
+  }, [playSound, drums]); // Added drums as dependency
 
   return (
     <div className="p-6 bg-gray-100 rounded-lg shadow-xl max-w-2xl mx-auto">
