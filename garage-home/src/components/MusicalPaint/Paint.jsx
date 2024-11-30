@@ -87,14 +87,24 @@ const MusicalPaint = () => {
     }
   };
 
+  const getCoordinates = (e) => {
+    const rect = canvasRef.current.getBoundingClientRect();
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+    return {
+      x: clientX - rect.left,
+      y: clientY - rect.top
+    };
+  };
+
   const startDrawing = async (e) => {
+    e.preventDefault(); // Prevent scrolling on touch devices
+    
     if (!isAudioInitialized) {
       await initAudio();
     }
     
-    const rect = canvasRef.current.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
+    const { x, y } = getCoordinates(e);
     
     const ctx = canvasRef.current.getContext('2d');
     ctx.beginPath();
@@ -107,11 +117,10 @@ const MusicalPaint = () => {
   };
 
   const draw = (e) => {
+    e.preventDefault(); // Prevent scrolling on touch devices
     if (!isDrawing) return;
     
-    const rect = canvasRef.current.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
+    const { x, y } = getCoordinates(e);
     
     const ctx = canvasRef.current.getContext('2d');
     ctx.beginPath();
@@ -189,7 +198,7 @@ const MusicalPaint = () => {
           
           {showAudioPrompt && (
             <div className="mb-4 p-3 bg-blue-50 text-blue-700 rounded-lg">
-              Click anywhere on the canvas to enable audio
+              Tap anywhere on the canvas to enable audio
             </div>
           )}
           
@@ -201,7 +210,10 @@ const MusicalPaint = () => {
             onMouseMove={draw}
             onMouseUp={stopDrawing}
             onMouseOut={stopDrawing}
-            className="w-full border rounded bg-gray-50 cursor-crosshair"
+            onTouchStart={startDrawing}
+            onTouchMove={draw}
+            onTouchEnd={stopDrawing}
+            className="w-full border rounded bg-gray-50 cursor-crosshair touch-none"
           />
           
           <div className="flex items-center justify-between mt-3 py-2 px-3 bg-gray-50 rounded">
