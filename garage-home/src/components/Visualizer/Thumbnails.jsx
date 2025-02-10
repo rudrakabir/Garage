@@ -1,6 +1,48 @@
 import React from 'react';
 
 export const Thumbnails = {
+  'audio-sine-waves': (
+    <svg viewBox="0 0 320 180" className="w-full h-full">
+      <rect width="320" height="180" fill="black" />
+      <path
+        d="M0,45 Q80,25 160,45 T320,45"
+        stroke="red"
+        strokeWidth="3"
+        fill="none"
+      />
+      <path
+        d="M0,90 Q80,70 160,90 T320,90"
+        stroke="#00ff00"
+        strokeWidth="3"
+        fill="none"
+      />
+      <path
+        d="M0,135 Q80,115 160,135 T320,135"
+        stroke="blue"
+        strokeWidth="3"
+        fill="none"
+      />
+      <rect
+        x="110"
+        y="70"
+        width="100"
+        height="40"
+        rx="5"
+        fill="white"
+      />
+      <text
+        x="160"
+        y="95"
+        textAnchor="middle"
+        fill="black"
+        fontSize="12"
+        fontFamily="Arial"
+      >
+        Start Audio
+      </text>
+    </svg>
+  ),
+  
   'bouncing-lines': (
     <svg viewBox="0 0 320 180" className="w-full h-full">
       <rect width="320" height="180" fill="black" />

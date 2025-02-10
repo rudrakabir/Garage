@@ -3,6 +3,7 @@ import { X } from 'lucide-react';
 import { Thumbnails } from './Thumbnails';
 
 const visualizations = [
+  { title: "Audio Sine Waves", file: "audio-sine-waves.html", id: "audio-sine-waves", description: "Interactive audio visualization with microphone input" },
   { title: "Bouncing Lines", file: "bouncing-lines.html", id: "bouncing-lines" },
   { title: "DVD and Line", file: "dvd-and-line.html", id: "dvd-and-line" },
   { title: "Fullscreen Horizontal", file: "fullscreen-horizontal.html", id: "fullscreen-horizontal" },
@@ -41,18 +42,23 @@ const Visualizer = () => {
             src={`/visualizations/${selectedVis}`}
             className="w-full h-full border-none"
             title="Visualization"
+            allow="microphone"
           />
         </div>
       ) : (
         <div>
-          <h1 className="text-4xl font-bold mb-6">Visual Projections</h1>
+          <h1 className="text-4xl font-bold mb-8">Visual Projections</h1>
           
           <div className="mb-12 max-w-3xl">
-            <p className="text-gray-300 mb-4">
-              This collection features minimal HTML animations designed specifically for projector-based installations. When projected through a smoke machine or haze, these simple line patterns create captivating three-dimensional light sculptures in the air.
+            <p className="text-lg text-gray-300 mb-4">
+              This collection features minimal HTML animations designed specifically for projector-based installations. 
+              When projected through a smoke machine or haze, these simple line patterns create captivating three-dimensional 
+              light sculptures in the air.
             </p>
-            <p className="text-gray-300">
-              For best results, use these visualizations in a dark room with a bright projector and a smoke/haze machine. The contrast between the black background and bright lines creates sharp, defined beams that interact beautifully with the smoke particles.
+            <p className="text-lg text-gray-300">
+              For best results, use these visualizations in a dark room with a bright projector and a smoke/haze machine. 
+              The contrast between the black background and bright lines creates sharp, defined beams that interact 
+              beautifully with the smoke particles.
             </p>
           </div>
 
@@ -68,6 +74,12 @@ const Visualizer = () => {
                 </div>
                 <div className="p-4">
                   <h3 className="text-xl font-semibold">{vis.title}</h3>
+                  {vis.description && (
+                    <p className="text-gray-400 mt-2 text-sm">{vis.description}</p>
+                  )}
+                  {vis.id === 'audio-sine-waves' && (
+                    <p className="text-yellow-400 mt-2 text-sm">Requires microphone access</p>
+                  )}
                 </div>
               </div>
             ))}

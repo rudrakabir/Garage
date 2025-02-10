@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route, Link, useNavigate } from 'react-router-dom';
-import { Code2, Music, Type, Music2, ArrowLeft, Music4, Speaker, Eye } from 'lucide-react';
+import { Code2, Music, Type, Music2, ArrowLeft, Music4, Speaker, Eye, Waves } from 'lucide-react';
 import DrumPad from './components/DrumPad/DrumPad';
 import TextSynth from './components/TextSynth/TextSynth';
 import RhythmicTextSynth from './components/TextSynth/RhythmicTextSynth';
@@ -9,6 +9,7 @@ import MusicalPaint from './components/MusicalPaint/Paint';
 import DrumMachine from './components/DrumMachine/machine.jsx';
 import Soundboard from './components/Soundboard';
 import Visualizer from './components/Visualizer/Visualizer';
+import Theremin from './components/Theremin/Theremin';
 
 // Navigation bar component for app pages
 const NavBar = () => {
@@ -101,6 +102,12 @@ const Home = () => {
       description: "Collection of fullscreen visual effects and animations",
       icon: Eye,
       link: "/visualizer"
+    },
+    {
+      title: "Visual Theremin",
+      description: "Control sound and visuals with mouse movement - X controls pitch, Y controls volume",
+      icon: Waves,
+      link: "/theremin"
     }
   ];
 
@@ -169,6 +176,11 @@ const App = () => {
         <Route path="/visualizer" element={
           <AppLayout>
             <Visualizer />
+          </AppLayout>
+        } />
+        <Route path="/theremin" element={
+          <AppLayout>
+            <Theremin />
           </AppLayout>
         } />
       </Routes>

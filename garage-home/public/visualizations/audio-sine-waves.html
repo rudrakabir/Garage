@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: black;
+    }
+    
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+    
+    path {
+      stroke-width: 6;
+      fill: none;
+    }
+
+    #startButton {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 20px 40px;
+      font-size: 24px;
+      cursor: pointer;
+      z-index: 100;
+    }
+  </style>
+</head>
+<body>
+  <button id="startButton">Start Audio</button>
+  <svg id="waves"></svg>
+
+  <script>
+    const waves = {
+      red: { y: 200, offset: 0 },
+      green: { y: 400, offset: 2 },
+      blue: { y: 600, offset: 4 }
+    };
+    
+    let audioContext;
+    let analyser;
+    let dataArray;
+    const sensitivity = 5; // Increased sensitivity multiplier
+    
+    function createSineWave(x, amplitude) {
+      const points = [];
+      const width = window.innerWidth;
+      const frequency = 0.005;
+      
+      for (let i = 0; i <= width; i += 20) {
+        const y = amplitude * Math.sin(frequency * i + x);
+        points.push(`${i},${y}`);
+      }
+      
+      return `M${points.join(' L')}`;
+    }
+    
+    function animate() {
+      analyser.getByteFrequencyData(dataArray);
+      
+      const svg = document.getElementById('waves');
+      Object.entries(waves).forEach(([color, wave]) => {
+        // Get different frequency bands for each wave
+        const bandIndex = Math.floor(wave.offset * dataArray.length / 10);
+        const amplitude = (dataArray[bandIndex] || 0) * sensitivity;
+        
+        // Add vertical motion
+        wave.y += Math.sin(Date.now() * 0.001 + wave.offset) * 2;
+        wave.y = Math.max(100, Math.min(window.innerHeight - 100, wave.y));
+        
+        const path = svg.querySelector(`#${color}Wave`);
+        if (path) {
+          const d = createSineWave(Date.now() * 0.002 + wave.offset, amplitude);
+          path.setAttribute('d', d);
+          path.setAttribute('transform', `translate(0, ${wave.y})`);
+        }
+      });
+      
+      requestAnimationFrame(animate);
+    }
+    
+    document.getElementById('startButton').addEventListener('click', async () => {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        document.getElementById('startButton').style.display = 'none';
+        
+        audioContext = new AudioContext();
+        const source = audioContext.createMediaStreamSource(stream);
+        analyser = audioContext.createAnalyser();
+        analyser.fftSize = 256;
+        source.connect(analyser);
+        
+        dataArray = new Uint8Array(analyser.frequencyBinCount);
+        
+        const svg = document.getElementById('waves');
+        svg.innerHTML = `
+          <path id="redWave" stroke="red"/>
+          <path id="greenWave" stroke="#00ff00"/>
+          <path id="blueWave" stroke="blue"/>
+        `;
+        
+        animate();
+      } catch (err) {
+        console.error('Error accessing microphone:', err);
+        alert('Unable to access microphone. Please ensure microphone permissions are granted.');
+      }
+    });
+  </script>
+</body>
+</html>
