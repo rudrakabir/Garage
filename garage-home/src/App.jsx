@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route, Link, useNavigate } from 'react-router-dom';
-import { Code2, Music, Type, Music2, ArrowLeft, Music4, Speaker, Eye, Waves } from 'lucide-react';
+import { Code2, Music, Type, Music2, ArrowLeft, Music4, Speaker, Eye, Waves, Timer } from 'lucide-react';
 import DrumPad from './components/DrumPad/DrumPad';
 import TextSynth from './components/TextSynth/TextSynth';
 import RhythmicTextSynth from './components/TextSynth/RhythmicTextSynth';
@@ -10,6 +10,7 @@ import DrumMachine from './components/DrumMachine/machine.jsx';
 import Soundboard from './components/Soundboard';
 import Visualizer from './components/Visualizer/Visualizer';
 import Theremin from './components/Theremin/Theremin';
+import VisualMetronome from './components/VisualMetronome/VisualMetronome';
 
 // Navigation bar component for app pages
 const NavBar = () => {
@@ -108,6 +109,12 @@ const Home = () => {
       description: "Control sound and visuals with mouse movement - X controls pitch, Y controls volume",
       icon: Waves,
       link: "/theremin"
+    },
+    {
+      title: "Visual Metronome",
+      description: "Animated metronome with customizable visual patterns synced to tempo",
+      icon: Timer,
+      link: "/metronome"
     }
   ];
 
@@ -181,6 +188,11 @@ const App = () => {
         <Route path="/theremin" element={
           <AppLayout>
             <Theremin />
+          </AppLayout>
+        } />
+        <Route path="/metronome" element={
+          <AppLayout>
+            <VisualMetronome />
           </AppLayout>
         } />
       </Routes>
