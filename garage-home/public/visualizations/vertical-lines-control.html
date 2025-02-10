@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: black;
+    }
+    
+    :root {
+      --animation-duration: 10s;
+    }
+    
+    .line {
+      position: absolute;
+      width: 6px;
+      height: 100vh;
+      animation: moveRight var(--animation-duration) linear infinite;
+      top: 0;
+    }
+    
+    .red-line { background: red; }
+    .green-line { background: #00ff00; }
+    .blue-line { background: blue; }
+    
+    @keyframes moveRight {
+      0% {
+        transform: translateX(-6px);
+      }
+      100% {
+        transform: translateX(100vw);
+      }
+    }
+    
+    .controls {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.2);
+      padding: 10px;
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .controls label {
+      color: white;
+      font-family: Arial, sans-serif;
+    }
+    
+    #speedControl {
+      width: 200px;
+    }
+  </style>
+</head>
+<body>
+  <script>
+    // Create lines with proper spacing
+    function createLines() {
+      const container = document.createElement('div');
+      const totalLines = 12;
+      const spacing = 100 / 13; // Divide viewport into 13 segments for 12 lines
+      
+      for (let i = 0; i < totalLines; i++) {
+        const line = document.createElement('div');
+        line.className = 'line ' + getColorClass(i);
+        line.style.left = `${spacing * (i + 1)}vw`;
+        // Add staggered animation delay
+        line.style.animationDelay = `${(i * -10) / totalLines}s`;
+        container.appendChild(line);
+      }
+      
+      document.body.appendChild(container);
+    }
+    
+    function getColorClass(index) {
+      const group = Math.floor(index / 4);
+      switch(group) {
+        case 0: return 'red-line';
+        case 1: return 'green-line';
+        case 2: return 'blue-line';
+        default: return 'red-line';
+      }
+    }
+    
+    function updateSpeed(value) {
+      // Convert slider value (1-100) to animation duration (10s - 0.1s)
+      const duration = (101 - value) / 10;
+      document.documentElement.style.setProperty('--animation-duration', `${duration}s`);
+    }
+  </script>
+  
+  <div class="controls">
+    <label for="speedControl">Speed:</label>
+    <input type="range" id="speedControl" min="1" max="100" value="50" 
+           oninput="updateSpeed(this.value)">
+  </div>
+  
+  <script>
+    createLines();
+    updateSpeed(50); // Set initial speed
+  </script>
+</body>
+</html>

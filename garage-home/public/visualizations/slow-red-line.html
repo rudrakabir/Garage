@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: black;
+    }
+    
+    .line {
+      position: absolute;
+      width: 100vw;
+      height: 6px;
+      background: red;
+      left: 0;
+      animation: moveUp 100s linear infinite;
+    }
+    
+    @keyframes moveUp {
+      from {
+        transform: translateY(100vh);
+      }
+      to {
+        transform: translateY(-6px);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="line"></div>
+</body>
+</html>

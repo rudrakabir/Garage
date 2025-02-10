@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: black;
+    }
+    
+    .horizontal-line {
+      position: absolute;
+      width: 100vw;
+      height: 2px;
+      background: white;
+      top: 50%;
+      animation: moveRight 10s linear infinite;
+    }
+    
+    @keyframes moveRight {
+      from {
+        transform: translateX(-100vw);
+      }
+      to {
+        transform: translateX(100vw);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="horizontal-line"></div>
+</body>
+</html>

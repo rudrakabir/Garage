@@ -1,12 +1,14 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route, Link, useNavigate } from 'react-router-dom';
-import { Code2, Music, Type, Music2, ArrowLeft, Music4 } from 'lucide-react';
+import { Code2, Music, Type, Music2, ArrowLeft, Music4, Speaker, Eye } from 'lucide-react';
 import DrumPad from './components/DrumPad/DrumPad';
 import TextSynth from './components/TextSynth/TextSynth';
 import RhythmicTextSynth from './components/TextSynth/RhythmicTextSynth';
 import ShantyGenerator from './components/ShantyGenerator/ShantyGenerator';
 import MusicalPaint from './components/MusicalPaint/Paint';
 import DrumMachine from './components/DrumMachine/machine.jsx';
+import Soundboard from './components/Soundboard';
+import Visualizer from './components/Visualizer/Visualizer';
 
 // Navigation bar component for app pages
 const NavBar = () => {
@@ -88,6 +90,18 @@ const Home = () => {
       icon: Music4,
       link: "/machine"
     },
+    {
+      title: "Soundboard",
+      description: "Drop in audio files and play them instantly",
+      icon: Speaker,
+      link: "/soundboard"
+    },
+    {
+      title: "Visual Projections",
+      description: "Collection of fullscreen visual effects and animations",
+      icon: Eye,
+      link: "/visualizer"
+    }
   ];
 
   return (
@@ -143,11 +157,20 @@ const App = () => {
           </AppLayout>
         } />
         <Route path="/paint" element={
-  <AppLayout>
-    <MusicalPaint />
-  </AppLayout>
-} />
-
+          <AppLayout>
+            <MusicalPaint />
+          </AppLayout>
+        } />
+        <Route path="/soundboard" element={
+          <AppLayout>
+            <Soundboard />
+          </AppLayout>
+        } />
+        <Route path="/visualizer" element={
+          <AppLayout>
+            <Visualizer />
+          </AppLayout>
+        } />
       </Routes>
     </BrowserRouter>
   );

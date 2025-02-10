@@ -1,4 +1,9 @@
 /* src/styles/index.css */
+@import './components/drumpad.css';
+@import './components/textsynth.css';
+@import './components/shanty.css';
+@import './components/machine.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -7,9 +12,3 @@
 body {
   @apply bg-gray-50;
 }
-
-/* Import component styles */
-@import './components/drumpad.css';
-@import './components/textsynth.css';
-@import './components/shanty.css';
-@import './components/machine.css';

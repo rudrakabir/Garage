@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: black;
+    }
+    
+    .vertical-line {
+      position: absolute;
+      width: 2px;
+      height: 100vh;
+      background: white;
+      left: 50%;
+      animation: moveUp 2s linear infinite;
+    }
+    
+    .horizontal-line {
+      position: absolute;
+      width: 100vw;
+      height: 2px;
+      background: white;
+      top: 50%;
+      animation: moveRight 2s linear infinite;
+    }
+    
+    @keyframes moveUp {
+      from {
+        transform: translateY(100vh);
+      }
+      to {
+        transform: translateY(-100vh);
+      }
+    }
+    
+    @keyframes moveRight {
+      from {
+        transform: translateX(-100vw);
+      }
+      to {
+        transform: translateX(100vw);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="vertical-line"></div>
+  <div class="horizontal-line"></div>
+</body>
+</html>
