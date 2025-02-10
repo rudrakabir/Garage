@@ -1,6 +1,6 @@
 # The Garage 🎼
 
-A collection of experimental web applications focused on music and audio creation. Built with React and modern web audio technologies.
+A collection of experimental web applications as art. Built with React.
 
 ## 🔧 Adding a New Tool - Quick Guide
 
