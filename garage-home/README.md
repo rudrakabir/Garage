@@ -1,100 +1,80 @@
-# The Garage 🎼
+# The Garage
 
-A collection of experimental web applications as art. Built with React.
+The Garage is a React + Vite project containing interactive music and visual web tools.
 
-## 🔧 Adding a New Tool - Quick Guide
+## Available Tools
 
-To add a new audio tool to the project:
+- `Shanty Generator` (`/shanty`) - Generate sea shanties with rhythm and melody patterns.
+- `Text Synth` (`/text-synth`) - Convert text into musical notes with scale controls.
+- `Rhythmic Text Synth` (`/rhythmic-text-synth`) - Turn text into rhythmic patterns.
+- `Drum Pad` (`/drumpad`) - Play one-shot drum samples from pads.
+- `Musical Paint` (`/paint`) - Draw on a canvas to generate musical output.
+- `Drum Machine` (`/machine`) - Build loop-based beats.
+- `Soundboard` (`/soundboard`) - Load and trigger your own audio clips.
+- `Visual Projections` (`/visualizer`) - Fullscreen visual experiments.
+- `Visual Theremin` (`/theremin`) - Mouse-driven pitch and volume control.
+- `Visual Metronome` (`/metronome`) - Animated metronome with tempo-based visuals.
+- `Aurora Orchestra` (`/aurora-orchestra`) - Interactive audiovisual composition space.
+- `Pulse Garden` (`/pulse-garden`) - Plant moving pulses that evolve into generative rhythm, harmony, and light.
 
-1. Create a new component folder in `src/components/YourTool/`
-2. In `App.jsx`, add your tool to the `apps` array:
-```javascript
-{
-  title: "Your Tool Name",
-  description: "Brief description of what it does",
-  icon: Music4,  // Choose an icon from lucide-react
-  link: "/your-tool-route"
-}
-```
-3. Add the route in `App.jsx`:
-```javascript
-<Route path="/your-tool-route" element={
-  <AppLayout>
-    <YourTool />
-  </AppLayout>
-} />
-```
-
-That's it! Your tool will automatically appear on the home page with navigation.
-
-## Features
-
-### 🎵 Musical Applications
-
-- **Shanty Generator**: Generate sea shanties with musical patterns and rhythm
-- **Text Synth**: Convert text into musical melodies with customizable scales
-- **Rhythmic Text Synth**: Create rhythmic patterns from text using natural speech patterns
-- **Drum Pad**: Create beats with an interactive drum pad
-- **Musical Paint**: Draw melodies and create visual music on a canvas
-- **Drum Machine**: Create rhythms with a loop-based drum machine
-
-## Technology Stack
+## Tech Stack
 
 - React 18
-- Vite
+- Vite 5
+- React Router DOM 6
 - Tailwind CSS
-- React Router DOM
-- Tone.js (Audio synthesis)
-- Tonal.js (Music theory utilities)
-- Lucide React (Icons)
+- Tone.js
+- Tonal.js
+- Lucide React
 
 ## Getting Started
 
-1. Clone the repository
-```bash
-git clone [repository-url]
-```
+From the repository root:
 
-2. Install dependencies
 ```bash
+cd garage-home
 npm install
-```
-
-3. Start the development server
-```bash
 npm run dev
 ```
 
-4. Build for production
-```bash
-npm run build
-```
+The dev server starts on the Vite default URL (usually `http://localhost:5173`).
 
-## Development
+## Scripts
 
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run preview` - Preview production build
-- `npm run lint` - Run ESLint
+Run these inside `garage-home/`:
+
+- `npm run dev` - Start local development server.
+- `npm run build` - Build production assets into `dist/`.
+- `npm run preview` - Preview the production build locally.
+- `npm run lint` - Run ESLint on `src/`.
+
+## Deployment (Netlify)
+
+Netlify is configured in the repo root `netlify.toml` with:
+
+- Base directory: `garage-home`
+- Build command: `npm install && npm run build`
+- Publish directory: `dist`
+
+SPA redirects are enabled to route all paths to `index.html`.
+
+## Add a New Tool
+
+1. Create your component in `src/components/YourTool/`.
+2. Import it in `src/App.jsx`.
+3. Add a card object to the `apps` array in `Home`.
+4. Add a `<Route>` entry in `src/App.jsx`, wrapped in `AppLayout`.
+5. Add any tool-specific styles in `src/styles/components/` if needed.
 
 ## Project Structure
 
+```text
+garage-home/
+  src/
+    components/           # Individual tools
+    styles/               # Shared and component styles
+    App.jsx               # Home cards + routing
+    main.jsx              # React entry point
+  public/                 # Static audio and visualization assets
+  netlify.toml (repo root)
 ```
-src/
-  ├── components/         # React components for each application
-  │   ├── DrumPad/
-  │   ├── TextSynth/
-  │   ├── ShantyGenerator/
-  │   ├── MusicalPaint/
-  │   └── DrumMachine/
-  ├── App.jsx            # Main application component and routing
-  └── main.jsx          # Application entry point
-```
-
-## Contributing
-
-Feel free to open issues and pull requests for any improvements you'd like to add.
-
-## License
-
-[Add your license here]
