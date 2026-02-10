@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import * as Tone from 'tone';
 
 const SHAPES = {
@@ -170,7 +170,7 @@ const VisualMetronome = () => {
         {beatElements}
       </div>
 
-      <style jsx>{`
+      <style>{`
         @keyframes ping-once {
           0% { transform: scale(1); opacity: 0.3; }
           50% { transform: scale(1.5); opacity: 1; }

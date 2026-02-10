@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { Play, Pause, RotateCw, Volume2, VolumeX } from 'lucide-react';
 
 const NOTES = {
@@ -151,7 +151,7 @@ const ShantyGenerator = () => {
     }
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     return () => {
       if (intervalRef.current) {
         clearInterval(intervalRef.current);

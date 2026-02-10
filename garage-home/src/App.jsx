@@ -1,4 +1,3 @@
-import React from 'react';
 import { BrowserRouter, Routes, Route, Link, useNavigate } from 'react-router-dom';
 import { Code2, Music, Type, Music2, ArrowLeft, Music4, Speaker, Eye, Waves, Timer } from 'lucide-react';
 import DrumPad from './components/DrumPad/DrumPad';

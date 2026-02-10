@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 
 // Move drums array outside component
 const DRUMS = [
@@ -22,7 +22,6 @@ const DrumPad = () => {
 
   useEffect(() => {
     const audioObj = {};
-    const errors = [];
     let loadedCount = 0;
 
     DRUMS.forEach(({ key, sound, label }) => {
@@ -37,7 +36,6 @@ const DrumPad = () => {
       }, { once: true });
 
       audio.addEventListener('error', () => {
-        errors.push(`Failed to load ${label} (${sound})`);
         setLoadingErrors(prev => [...prev, `Failed to load ${label} (${sound})`]);
       }, { once: true });
 

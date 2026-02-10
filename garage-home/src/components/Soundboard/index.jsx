@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Loader2 } from 'lucide-react';
 import SoundButton from './SoundButton';
-import { getDisplayName, isAudioFile, sortFiles } from './utils';
+import { getDisplayName, isAudioFile } from './utils';
 
 const Soundboard = () => {
   const [sounds, setSounds] = useState([]);
@@ -54,7 +54,7 @@ const Soundboard = () => {
           Drop MP3 or WAV files in the /public/sounds directory to add them to the soundboard.
         </p>
         <p className="text-xs text-zinc-500">
-          Note: You'll need to restart the development server after adding new files.
+          Note: You&apos;ll need to restart the development server after adding new files.
         </p>
       </header>
 

@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Play, Pause, Volume2, VolumeX, Save, Upload } from 'lucide-react';
 
 const Card = ({ children, className = '' }) => (

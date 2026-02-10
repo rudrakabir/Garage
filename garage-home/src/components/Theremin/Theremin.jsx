@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import * as Tone from 'tone';
 
 const Theremin = () => {
-  const [synth, setSynth] = useState(null);
   const canvasRef = useRef(null);
+  const synthRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isInitialized, setIsInitialized] = useState(false);
 
@@ -28,7 +28,7 @@ const Theremin = () => {
       }).toDestination();
 
       console.log('Synth created');
-      setSynth(newSynth);
+      synthRef.current = newSynth;
       setIsInitialized(true);
     } catch (error) {
       console.error('Error initializing audio:', error);
@@ -37,7 +37,7 @@ const Theremin = () => {
 
   // Handle mouse movement
   const handleMouseMove = (e) => {
-    if (!isPlaying || !synth) return;
+    if (!isPlaying || !synthRef.current) return;
 
     const rect = canvasRef.current.getBoundingClientRect();
     const x = e.clientX - rect.left;
@@ -47,11 +47,11 @@ const Theremin = () => {
     const minFreq = 100;
     const maxFreq = 1000;
     const freq = minFreq * Math.pow(maxFreq/minFreq, x/rect.width);
-    synth.frequency.value = freq;
+    synthRef.current.frequency.value = freq;
 
     // Map Y position to volume
     const volume = -((y / rect.height) * 30);
-    synth.volume.value = volume;
+    synthRef.current.volume.value = volume;
 
     // Draw visual feedback
     drawVisuals(x, y, rect.width, rect.height);
@@ -74,9 +74,6 @@ const Theremin = () => {
 
     for (let i = 0; i < lineCount; i++) {
       const xPos = i * lineSpacing;
-      const amplitude = Math.sin((Date.now() / 1000) + i) * 50;
-      const yOffset = y + amplitude;
-
       ctx.beginPath();
       ctx.moveTo(xPos, 0);
       ctx.lineTo(xPos + lineSpacing/2, height);
@@ -95,8 +92,8 @@ const Theremin = () => {
     if (!isInitialized) {
       await initializeAudio();
     }
-    if (synth) {
-      synth.triggerAttack();
+    if (synthRef.current) {
+      synthRef.current.triggerAttack();
       setIsPlaying(true);
       console.log('Sound started');
     }
@@ -104,8 +101,8 @@ const Theremin = () => {
 
   // Stop sound
   const handleMouseLeave = () => {
-    if (synth) {
-      synth.triggerRelease();
+    if (synthRef.current) {
+      synthRef.current.triggerRelease();
       setIsPlaying(false);
       console.log('Sound stopped');
     }
@@ -125,8 +122,9 @@ const Theremin = () => {
 
     // Cleanup
     return () => {
-      if (synth) {
-        synth.dispose();
+      if (synthRef.current) {
+        synthRef.current.dispose();
+        synthRef.current = null;
       }
     };
   }, []);

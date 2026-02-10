@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import { useState, useRef } from 'react';
 import { Play, Pause, Volume2, VolumeX  } from 'lucide-react';
 
 const RhythmicTextSynth = () => {
@@ -19,7 +19,7 @@ const RhythmicTextSynth = () => {
   };
 
   // Base note durations in seconds
-  const getNoteParameters = (word, isLastInSentence = false) => {
+  const getNoteParameters = (word) => {
     const syllables = countSyllables(word);
     const baseDuration = Math.max(0.1, 60 / tempo); // Ensure minimum duration
     
@@ -46,7 +46,7 @@ const RhythmicTextSynth = () => {
             {time: Math.max(0, baseDuration * 0.7), length: Math.max(0.1, baseDuration * 0.3), accent: 0.9}
           ]
         };
-      default:
+      default: {
         const subDuration = Math.max(0.1, baseDuration / syllables);
         return {
           duration: baseDuration,
@@ -56,8 +56,9 @@ const RhythmicTextSynth = () => {
             accent: i === 0 ? 1.2 : 0.9
           }))
         };
+      }
     }
-};
+  };
 
   // Musical scales with more varied notes
   const scales = {
@@ -222,10 +223,12 @@ const RhythmicTextSynth = () => {
       </div>
       
       <div className="bg-blue-50 p-4 rounded-lg text-sm text-blue-800 space-y-1">
-        <p>🎵 Each word's rhythm matches its syllables</p>
+        <p>🎵 Each word&apos;s rhythm matches its syllables</p>
         <p>❗ Questions rise in pitch</p>
         <p>✨ Natural speech patterns create the rhythm</p>
-        <p>Try typing: "How are you today?" vs "I am fine!"</p>
+        <p>
+          Try typing: &quot;How are you today?&quot; vs &quot;I am fine!&quot;
+        </p>
       </div>
     </div>
   );

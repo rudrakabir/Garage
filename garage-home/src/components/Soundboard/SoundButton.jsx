@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Play, Square } from 'lucide-react';
 
 const SoundButton = ({ name, soundUrl }) => {
   const [isPlaying, setIsPlaying] = useState(false);
     const [audio, setAudio] = useState(null);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const newAudio = new Audio(soundUrl);
     newAudio.addEventListener('loadeddata', () => {
       console.log('Audio loaded:', soundUrl);
@@ -34,8 +34,18 @@ const SoundButton = ({ name, soundUrl }) => {
     }
   };
 
-  // When the sound ends, reset the button state
-  audio.onended = () => setIsPlaying(false);
+  // Keep UI state in sync when playback finishes.
+  useEffect(() => {
+    if (!audio) {
+      return undefined;
+    }
+
+    const handleEnded = () => setIsPlaying(false);
+    audio.addEventListener('ended', handleEnded);
+    return () => {
+      audio.removeEventListener('ended', handleEnded);
+    };
+  }, [audio]);
 
   return (
     <button

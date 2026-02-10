@@ -1,5 +1,3 @@
-import React from 'react';
-
 export const Thumbnails = {
   'audio-sine-waves': (
     <svg viewBox="0 0 320 180" className="w-full h-full">
