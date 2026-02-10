@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="The Garage icon">
+  <defs>
+    <linearGradient id="garageBg" x1="8" y1="6" x2="56" y2="58" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0f172a" />
+      <stop offset="1" stop-color="#1e293b" />
+    </linearGradient>
+    <linearGradient id="garageAccent" x1="16" y1="14" x2="48" y2="50" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#f97316" />
+      <stop offset="1" stop-color="#0ea5e9" />
+    </linearGradient>
+  </defs>
+
+  <rect x="4" y="4" width="56" height="56" rx="14" fill="url(#garageBg)" />
+  <rect x="4.5" y="4.5" width="55" height="55" rx="13.5" fill="none" stroke="#334155" stroke-width="1" />
+
+  <path d="M16 22.5H48M16 32H48M16 41.5H48" stroke="#334155" stroke-opacity=".45" stroke-width="1.5" />
+  <path d="M22.5 16V48M32 16V48M41.5 16V48" stroke="#334155" stroke-opacity=".35" stroke-width="1.5" />
+
+  <path d="M44 24A13 13 0 1 0 44 40" fill="none" stroke="url(#garageAccent)" stroke-width="4.5" stroke-linecap="round" />
+  <path d="M33 32H45" stroke="url(#garageAccent)" stroke-width="4.5" stroke-linecap="round" />
+
+  <circle cx="13" cy="13" r="2" fill="#94a3b8" />
+  <circle cx="51" cy="13" r="2" fill="#94a3b8" />
+  <circle cx="13" cy="51" r="2" fill="#94a3b8" />
+  <circle cx="51" cy="51" r="2" fill="#94a3b8" />
+</svg>
