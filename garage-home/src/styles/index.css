@@ -4,6 +4,7 @@
 @import './components/shanty.css';
 @import './components/machine.css';
 @import './components/aurora-orchestra.css';
+@import './components/soundscapes.css';
 
 @tailwind base;
 @tailwind components;

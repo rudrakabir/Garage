@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route, Link, useNavigate } from 'react-router-dom';
-import { Code2, Music, Type, Music2, ArrowLeft, Music4, Speaker, Eye, Waves, Timer, Sparkles } from 'lucide-react';
+import { Code2, Music, Type, Music2, ArrowLeft, Music4, Speaker, Eye, Waves, Timer, Sparkles, Users } from 'lucide-react';
 import DrumPad from './components/DrumPad/DrumPad';
 import TextSynth from './components/TextSynth/TextSynth';
 import RhythmicTextSynth from './components/TextSynth/RhythmicTextSynth';
@@ -11,6 +11,7 @@ import Visualizer from './components/Visualizer/Visualizer';
 import Theremin from './components/Theremin/Theremin';
 import VisualMetronome from './components/VisualMetronome/VisualMetronome';
 import AuroraOrchestra from './components/AuroraOrchestra/AuroraOrchestra';
+import Soundscapes from './components/Soundscapes/Soundscapes';
 
 // Navigation bar component for app pages
 const NavBar = () => {
@@ -121,6 +122,12 @@ const Home = () => {
       description: "Draw constellations that bloom into a moving choir of light and harmony",
       icon: Sparkles,
       link: "/aurora-orchestra"
+    },
+    {
+      title: "Soundscapes",
+      description: "Camera-driven generative ambience that shifts from togetherness to tension",
+      icon: Users,
+      link: "/soundscapes"
     }
   ];
 
@@ -204,6 +211,11 @@ const App = () => {
         <Route path="/aurora-orchestra" element={
           <AppLayout>
             <AuroraOrchestra />
+          </AppLayout>
+        } />
+        <Route path="/soundscapes" element={
+          <AppLayout>
+            <Soundscapes />
           </AppLayout>
         } />
       </Routes>
