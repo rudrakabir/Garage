@@ -3,6 +3,7 @@
 @import './components/textsynth.css';
 @import './components/shanty.css';
 @import './components/machine.css';
+@import './components/aurora-orchestra.css';
 
 @tailwind base;
 @tailwind components;
